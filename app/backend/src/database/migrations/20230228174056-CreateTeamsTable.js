@@ -14,6 +14,10 @@ module.exports = {
       type: Sequelize.STRING,
       field: 'team_name'
     }
+   },{
+    underscored: true,
+    modelName: 'teams',
+    timestamps: false,
    })
   },
 
