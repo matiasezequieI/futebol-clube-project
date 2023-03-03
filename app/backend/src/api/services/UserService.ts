@@ -12,10 +12,15 @@ const secret: string = process.env.JWT_SECRET || 'eugostodebatata';
 export default class UserService implements IServiceUser {
   protected model: ModelStatic<Users> = Users;
 
-  generateToken = (email: string) => jwt.sign({ email }, secret, {
+  generateToken = (email: string, role: string) => jwt.sign({ email, role }, secret, {
     algorithm: 'HS256',
     expiresIn: '3h',
   });
+
+  validateToken = (token: string) => {
+    const uncryptedUser = jwt.verify(token, secret);
+    return uncryptedUser;
+  };
 
   async login(user: IUser): Promise<IToken> {
     const { email, password } = user;
@@ -30,7 +35,16 @@ export default class UserService implements IServiceUser {
       throw new ErrorStatus('401', 'Invalid email or password');
     }
 
-    const token = this.generateToken(user.email);
+    const token = this.generateToken(user.email, user.role);
     return { token };
+  }
+
+  async loginRole(authorization: string): Promise<string> {
+    const { email } = this.validateToken(authorization) as jwt.JwtPayload;
+
+    const user = await this.model.findOne({ where: { email } });
+    if (!user) return '';
+
+    return user.role;
   }
 }
