@@ -18,4 +18,20 @@ export default class MatchesService implements IServiceMatches {
       ],
     });
   }
+
+  getMatchesByProgress(status: boolean): Promise<Matches[]> {
+    return this.model.findAll({
+      where: {
+        inProgress: status,
+      },
+      include: [{ model: Teams,
+        as: 'homeTeam',
+        attributes: ['teamName'],
+      }, { model: Teams,
+        as: 'awayTeam',
+        attributes: ['teamName'],
+      },
+      ],
+    });
+  }
 }

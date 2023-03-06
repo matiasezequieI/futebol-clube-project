@@ -8,8 +8,16 @@ export default class MatchesController {
     this._service = service;
   }
 
-  async getAll(_req: Request, res:Response) {
-    const result = await this._service.getAll();
-    return res.status(200).json(result);
+  async getAll(req: Request, res:Response) {
+    const { inProgress } = req.query;
+
+    if (!inProgress) {
+      const result = await this._service.getAll();
+      return res.status(200).json(result);
+    }
+
+    const status = Boolean(inProgress);
+    const resultByStatus = await this._service.getMatchesByProgress(status);
+    return res.status(200).json(resultByStatus);
   }
 }
