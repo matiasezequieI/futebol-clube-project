@@ -15,8 +15,8 @@ export default class MatchesController {
       const result = await this._service.getAll();
       return res.status(200).json(result);
     }
+    const status = Boolean(inProgress === 'true');
 
-    const status = Boolean(inProgress);
     const resultByStatus = await this._service.getMatchesByProgress(status);
     return res.status(200).json(resultByStatus);
   }
