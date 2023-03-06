@@ -3,6 +3,7 @@ import 'express-async-errors';
 import ErrorHandler from './api/middlewares/ErrorHandler';
 import teamRoutes from './api/routes/TeamRoutes';
 import userRoutes from './api/routes/UserRoutes';
+import matchesRoutes from './api/routes/MatchesRoutes';
 
 class App {
   public app: express.Express;
@@ -31,6 +32,7 @@ class App {
   private initRoutes(): void {
     this.app.use('/teams', teamRoutes);
     this.app.use('/login', userRoutes);
+    this.app.use('/matches', matchesRoutes);
     this.app.use(ErrorHandler.handle);
   }
 
