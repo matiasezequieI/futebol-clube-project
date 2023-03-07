@@ -39,4 +39,8 @@ export default class MatchesService implements IServiceMatches {
     await this.model.update({ inProgress: false }, { where: { id } });
     return { message: 'Finished' };
   }
+
+  async updateMatch(id: number, homeTeamGoals: number, awayTeamGoals: number) {
+    await this.model.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+  }
 }
