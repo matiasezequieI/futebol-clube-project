@@ -20,4 +20,12 @@ export default class MatchesController {
     const resultByStatus = await this._service.getMatchesByProgress(status);
     return res.status(200).json(resultByStatus);
   }
+
+  async finishMatch(req: Request, res: Response) {
+    const { id } = req.params;
+    const numberId = Number(id);
+
+    const result = await this._service.finishMatch(numberId);
+    return res.status(200).json(result);
+  }
 }

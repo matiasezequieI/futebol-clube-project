@@ -6,7 +6,7 @@ import IServiceMatches from '../interfaces/IServiceMatches';
 export default class MatchesService implements IServiceMatches {
   protected model: ModelStatic<Matches> = Matches;
 
-  getAll(): Promise<Matches[]> {
+  async getAll(): Promise<Matches[]> {
     return this.model.findAll({
       include: [{ model: Teams,
         as: 'homeTeam',
@@ -19,7 +19,7 @@ export default class MatchesService implements IServiceMatches {
     });
   }
 
-  getMatchesByProgress(status: boolean): Promise<Matches[]> {
+  async getMatchesByProgress(status: boolean): Promise<Matches[]> {
     return this.model.findAll({
       where: {
         inProgress: status,
@@ -33,5 +33,10 @@ export default class MatchesService implements IServiceMatches {
       },
       ],
     });
+  }
+
+  async finishMatch(id: number): Promise<object> {
+    await this.model.update({ inProgress: false }, { where: { id } });
+    return { message: 'Finished' };
   }
 }
