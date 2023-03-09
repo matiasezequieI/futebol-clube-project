@@ -43,4 +43,22 @@ export default class MatchesService implements IServiceMatches {
   async updateMatch(id: number, homeTeamGoals: number, awayTeamGoals: number) {
     await this.model.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
   }
+
+  async createMatch(
+    homeTeamId: number,
+    awayTeamId: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ): Promise<Matches> {
+    const newMatch = await this.model.create({
+      homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals,
+      inProgress: true,
+    });
+
+    console.log(newMatch);
+    return newMatch;
+  }
 }
