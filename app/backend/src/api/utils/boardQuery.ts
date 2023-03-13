@@ -13,6 +13,11 @@ SUM(IF(matches.home_team_goals > matches.away_team_goals, 3, 0)
 / (COUNT(matches.home_team_id) * 3) * 100
 as efficiency
 FROM matches INNER JOIN teams on teams.id = matches.home_team_id
-WHERE matches.in_progress = false GROUP BY matches.home_team_id`;
+WHERE matches.in_progress = false GROUP BY matches.home_team_id
+ORDER BY totalPoints DESC,
+totalVictories DESC,
+goalsBalance DESC,
+goalsFavor DESC,
+goalsOwn DESC`;
 
 export default boardQuery;
