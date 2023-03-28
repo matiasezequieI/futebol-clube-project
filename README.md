@@ -43,13 +43,12 @@ Unsupported config option for services.db: 'platform'
 Unsupported config option for services.node: 'platform'
 ```
 
-<details>
-  <summary><strong>🤷🏽‍♀️ Foram encontradas 2 possíveis soluções para este problema:</strong></summary><br />
+<h2>Rodando o Projeto (Docker 🐋)</h2>
 
-- Você pode adicionar manualmente a option platform: linux/amd64 no service do banco de dados no arquivo docker-compose.yml do projeto, mas essa é uma solução local e você deverá reproduzir isso para os outros projetos.
+1. Clone o repositório em sua máquina local.
 
-- Você pode adicionar manualmente nos arquivos .bashrc, .zshenv ou .zshrc do seu computador a linha export DOCKER_DEFAULT_PLATFORM=linux/amd64, essa é uma solução global. As soluções foram com base nesta fonte.
-</details>
+2. Certifique-se de ter o docker-compose instalado.
+
 3. Execute o comando `npm run compose:up` para iniciar a aplicação ou acesse a pasta `app` e rode com o comando `docker-compose up -d --build`.
 
 4. Acesse o endereço http://localhost:3000 para acessar o site e http://localhost:3001 para acessar a API.
@@ -69,7 +68,7 @@ Unsupported config option for services.node: 'platform'
 ```
 
 <details>
-  <summary><strong>Foram encontradas 2 possíveis soluções para este problema:</strong></summary><br />
+  <summary><strong> Foram encontradas 2 possíveis soluções para este problema:</strong></summary><br />
 
 - Você pode adicionar manualmente a option platform: linux/amd64 no service do banco de dados no arquivo docker-compose.yml do projeto, mas essa é uma solução local e você deverá reproduzir isso para os outros projetos.
 
